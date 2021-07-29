@@ -1,0 +1,68 @@
+* `Trips`
+
+    * `id`: primary key
+
+        * `trip_budget`
+
+        * `traveller_amount`
+
+        * `traveller_id`: non - unique foreign key that references the`Traveller` model's `id` field (`Traveller.id`)
+
+            * `location_id`: non - unique foreign key that references the`Location` model's `id` field (`Location.id`)
+
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
+
+class Book extends Model { }
+
+Book.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        author: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        isbn: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        pages: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        edition: {
+            type: DataTypes.INTEGER,
+            defaultValue: 1
+        },
+        is_paperback: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
+        // Store a reference of the `id` of the `Reader` that owns this Book
+        reader_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'reader',
+                key: 'id',
+            },
+        },
+    },
+    {
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'book'
+    }
+);
+
+module.exports = Book;
