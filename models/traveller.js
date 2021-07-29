@@ -7,12 +7,11 @@
 //     * `email`
 
 const { Model, DataTypes } = require('sequelize');
-// const bcrypt = require('bcrypt');
-// const sequelize = require('../config/connection');
+const sequelize = require('../config/connection');
 
+class Traveller extends Model { }
 
-
-User.init(
+Traveller.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -20,7 +19,7 @@ User.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        username: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -33,23 +32,13 @@ User.init(
             },
         },
     },
-    // {
-    //     // hooks: {
-    //     //     beforeCreate: async (newUserData) => {
-    //     //         newUserData.password = await bcrypt.hash(newUserData.password, 10);
-    //     //         return newUserData;
-    //     //     },
-    //     //     beforeUpdate: async (updatedUserData) => {
-    //     //         updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-    //     //         return updatedUserData;
-    //     //     },
-    //     },
-    //     sequelize,
-    //     timestamps: false,
-    //     freezeTableName: true,
-    //     underscored: true,
-    //     modelName: 'user',
-    // }
+    {
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'traveller',
+    }
 );
 
 module.exports = Traveller;

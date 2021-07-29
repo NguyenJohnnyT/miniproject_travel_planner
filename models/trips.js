@@ -13,9 +13,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Book extends Model { }
+class Trips extends Model { }
 
-Book.init(
+Trips.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -23,39 +23,22 @@ Book.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        author: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        isbn: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        pages: {
+        trip_budget: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        },
-        edition: {
-            type: DataTypes.INTEGER,
-            defaultValue: 1
-        },
-        is_paperback: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true
-        },
-        // Store a reference of the `id` of the `Reader` that owns this Book
-        reader_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'reader',
-                key: 'id',
+            traveller_amount: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            // traveller_id
+            reader_id: {
+                type: DataTypes.INTEGER,
+                references: {
+                    model: 'reader',
+                    key: 'id',
+                },
             },
         },
-    },
     {
         sequelize,
         timestamps: false,
